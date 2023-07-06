@@ -1,0 +1,11 @@
+<html>
+    <h1>Search</h1>
+
+    <form action="" method="post" class="form-content">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Search" class="btn btn-primary">
+    </form>
+</html>
