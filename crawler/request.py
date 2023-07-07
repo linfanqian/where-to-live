@@ -28,6 +28,7 @@ class Request51(Request):
     def construct_url(self, page, filters):
         base_url = 'https://house.51.ca/rental'
         page_str = f'?page={page}'
+        sort_str = '&sortBy=update-time&sortOrder=desc'
         price_str = ''
         building_type_str = ''
         include_water_str = ''
@@ -87,7 +88,7 @@ class Request51(Request):
         if independent_bathroom:
             independent_bathroom_str = '&independentBathroom=1'
 
-        url = base_url + page_str + price_str + building_type_str + \
+        url = base_url + page_str + sort_str + price_str + building_type_str + \
               include_water_str + include_hydro_str + include_internet_str + \
               independent_kitchen_str + independent_bathroom_str
         return url

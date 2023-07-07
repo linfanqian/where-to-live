@@ -27,21 +27,15 @@ class SearchForm(forms.Form):
     independent_bathroom = forms.BooleanField(required=False)
     independent_kitchen = forms.BooleanField(required=False)
 
-
-'''
 class SubscribeForm(forms.Form):
+    EMAIL_INTERVAL = [
+        (6, "6h"),
+        (12, "12h"),
+        (24, "24h"),
+        (48, "48h"),
+    ]
+
     email = forms.EmailField()
-    start_date = forms.DateField(
-        widget=forms.NumberInput(attrs={'type': 'date'})
-    )
-    start_time = forms.DateTimeField()
-    interval = forms.ChoiceField(
-        choices=(
-            (3, "3h"),
-            (6, "6h"),
-            (12, "12h"),
-            (24, "24h"),
-            (48, "48h"),
-        )
-    )
-'''
+    start_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date'}))
+    interval = forms.ChoiceField(choices=EMAIL_INTERVAL)

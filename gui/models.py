@@ -3,7 +3,7 @@ import sys
 from django.db import models
 
 class SearchCondition(models.Model):
-    platforms = models.CharField(max_length=256)
+    platforms = models.CharField(max_length=256, default='')
     lowest_price = models.IntegerField(default=0)
     highest_price = models.IntegerField(default=sys.maxsize)
     location = models.CharField(max_length=256, blank=True, null=True)
@@ -14,8 +14,10 @@ class SearchCondition(models.Model):
     independent_bathroom = models.BooleanField(default=False)
     independent_kitchen = models.BooleanField(default=False)
 
-class Notice(models.Model):
-    email = models.EmailField(primary_key=True, max_length=256)
+class Subscription(models.Model):
+    search_condition = models.ForeignKey(SearchCondition, on_delete=models.CASCADE)
+    email = models.EmailField(primary_key=True, unique=True, max_length=256)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    next_time = models.DateTimeField()
     interval = models.IntegerField()  # unit in hour
