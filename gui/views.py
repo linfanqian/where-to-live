@@ -14,9 +14,7 @@ from django.core.exceptions import ValidationError
 from crawler.crawler import Crawler51
 
 from .forms import SearchForm, SubscribeForm
-
 from .models import SearchCondition, Subscription
-
 from .enums import Platform
 
 class SearchFormView(FormView):
