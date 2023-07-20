@@ -16,11 +16,28 @@ class SearchForm(forms.Form):
         ("DETACHED", "Detached"),
     ]
 
-    platforms = forms.MultipleChoiceField(choices=PLATFORM_CHOICES)
-    lowest_price = forms.IntegerField(required=False)
-    highest_price = forms.IntegerField(required=False)
-    location = forms.CharField(max_length=256, required=False)
-    building_types = forms.MultipleChoiceField(choices=BUILDING_TYPE_CHOICES, required=False)
+    platforms = forms.MultipleChoiceField(
+        choices=PLATFORM_CHOICES,
+        widget=forms.CheckboxSelectMultiple
+    )
+    lowest_price = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+    highest_price = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+    location = forms.CharField(
+        max_length=256, 
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    building_types = forms.MultipleChoiceField(
+        choices=BUILDING_TYPE_CHOICES, 
+        required=False,
+        widget=forms.CheckboxSelectMultiple
+    )
     include_water = forms.BooleanField(required=False)
     include_hydro = forms.BooleanField(required=False)
     include_internet = forms.BooleanField(required=False)
@@ -35,7 +52,14 @@ class SubscribeForm(forms.Form):
         (48, "48h"),
     ]
 
-    email = forms.EmailField()
-    start_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date'}))
-    end_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date'}))
-    interval = forms.ChoiceField(choices=EMAIL_INTERVAL)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    start_date = forms.DateField(
+        widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'})
+    )
+    end_date = forms.DateField(
+        widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'})
+    )
+    interval = forms.ChoiceField(
+        choices=EMAIL_INTERVAL,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )

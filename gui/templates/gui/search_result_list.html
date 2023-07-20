@@ -1,26 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <div>
-        <h1>You Selected:</h1>
-        <p>Platforms: {{ search_conditions.platforms }}</p>
-        <p>Lowest Price: {{ search_conditions.lowest_price }}</p>
-        <p>Highest Price: {{ search_conditions.highest_price }}</p>
-        <p>Location: {{ search_conditions.location }}</p>
-        <p>Building Types: {{ search_conditions.building_types }}</p>
-        <p>Include Water: {{ search_conditions.include_water }}</p>
-        <p>Include Hydro: {{ search_conditions.include_hydro }}</p>
-        <p>Include Internet: {{ search_conditions.include_internet }}</p>
-        <p>Independent Bathroom: {{ search_conditions.independent_bathroom }}</p>
-        <p>Independent Kitchen: {{ search_conditions.independent_kitchen }}</p>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10">
+            <h1>You Selected:</h1>
+            <p>Platforms: {{ search_conditions.platforms }}</p>
+            <p>Lowest Price: {{ search_conditions.lowest_price }}</p>
+            <p>Highest Price: {{ search_conditions.highest_price }}</p>
+            <p>Location: {{ search_conditions.location }}</p>
+            <p>Building Types: {{ search_conditions.building_types }}</p>
+            <p>Include Water: {{ search_conditions.include_water }}</p>
+            <p>Include Hydro: {{ search_conditions.include_hydro }}</p>
+            <p>Include Internet: {{ search_conditions.include_internet }}</p>
+            <p>Independent Bathroom: {{ search_conditions.independent_bathroom }}</p>
+            <p>Independent Kitchen: {{ search_conditions.independent_kitchen }}</p>
+        </div>
+        <div class="col"></div>
     </div>
 
-    <div style="white-space: pre-line">
-        <h1>Search Results:</h1>
-        <a class="btn btn-primary" href="{% url 'subscribe' %}">Notify me regularly through email</a>
-        <ul>
-            {% for result in search_results %}
-                <li>{{ result }}</li>
-            {% endfor %}
-        </ul>
+    </br>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10">
+            <h1>Search Results:</h1>
+            <a class="btn btn-primary" href="{% url 'subscribe' %}">Notify me regularly through email</a>
+            
+            <ul style="white-space: pre-line">
+                {% for result in search_results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col"></div>
     </div>
-</html>
+{% endblock %}
