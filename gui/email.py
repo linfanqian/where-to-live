@@ -11,10 +11,10 @@ from website.settings import DEFAULT_FROM_EMAIL
 from crawler.crawler import Crawler51
 
 def send_thank_email(receiver, start_time, end_time, interval):
-    message = f"Thank you for subscribing.\n \
-                You will receive notification emails about rentals with which\
-                conditions you selected from {start_time} to {end_time}\
-                for each {interval} hours."
+    message = f"Thank you for subscribing.\n" + \
+              f"You will receive notification emails about rentals with which" + \
+              f"conditions you selected from {start_time} to {end_time}" + \
+              f"for each {interval} hours."
 
     send_mail(
         "Subscription Confirmation",
