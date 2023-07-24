@@ -1,12 +1,27 @@
 from datetime import timedelta
 
-from django.core.mail import send_mass_mail
+from django.core.mail import send_mail, send_mass_mail
 
 from .models import Subscription
 from .enums import Platform
 from .mapping import search_condition_to_dict
 
+from website.settings import DEFAULT_FROM_EMAIL
+
 from crawler.crawler import Crawler51
+
+def send_thank_email(receiver, start_time, end_time, interval):
+    message = f"Thank you for subscribing.\n \
+                You will receive notification emails about rentals with which\
+                conditions you selected from {start_time} to {end_time}\
+                for each {interval} hours."
+
+    send_mail(
+        "Subscription Confirmation",
+        message,
+        DEFAULT_FROM_EMAIL,
+        [receiver,]
+    )
 
 def send_subscription_emails(time):
     email_messages = []
@@ -26,7 +41,7 @@ def send_subscription_emails(time):
         message = (
             "Housing Search Results",
             search_result_str,
-            "wheretolive@no-reply.com",
+            DEFAULT_FROM_EMAIL,
             [subscription.email]
         )
 

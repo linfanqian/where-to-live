@@ -16,6 +16,7 @@ from crawler.crawler import Crawler51
 from .forms import SearchForm, SubscribeForm
 from .models import SearchCondition, Subscription
 from .enums import Platform
+from .email import send_thank_email
 
 class SearchFormView(FormView):
     template_name = 'gui/search_form.html'
@@ -103,6 +104,7 @@ class SubscribeView(FormView):
             start_date = form.cleaned_data['start_date']
             end_date = form.cleaned_data['end_date']
             interval = form.cleaned_data['interval']
+            subscription_obj = None
             
             try:
                 with transaction.atomic():
@@ -119,7 +121,7 @@ class SubscribeView(FormView):
                         independent_kitchen=search_conditions['independent_kitchen']
                     )
 
-                    Subscription.objects.create(
+                    subscription_obj = Subscription.objects.create(
                         search_condition=search_condition_obj,
                         email=email,
                         start_time=datetime.combine(start_date, datetime.min.time()),
@@ -130,6 +132,15 @@ class SubscribeView(FormView):
             except Exception as e:
                 print(str(e))
                 return render(request, '500.html')
+            
+            # Subscription request stored to DB successfully
+            if subscription_obj:
+                send_thank_email(
+                    subscription_obj.email, 
+                    subscription_obj.start_time, 
+                    subscription_obj.end_time, 
+                    subscription_obj.interval
+                )
 
             return render(request, 'thank_you.html')
         
