@@ -12,8 +12,8 @@ from crawler.crawler import Crawler51
 
 def send_thank_email(receiver, start_time, end_time, interval):
     message = f"Thank you for subscribing.\n" + \
-              f"You will receive notification emails about rentals with which" + \
-              f"conditions you selected from {start_time} to {end_time}" + \
+              f"You will receive notification emails about rentals with which " + \
+              f"conditions you selected from {start_time} to {end_time} " + \
               f"for each {interval} hours."
 
     send_mail(
