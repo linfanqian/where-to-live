@@ -10,9 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
-
 import os
+
+from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,10 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery settings
 CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_BEAT_SCHEDULE = {
-    'add-every-30-seconds': {
-        'task': 'gui.tasks.add',
-        'schedule': 30.0,
-        'args': (16, 16),
+    'subscription-email-task': {
+        'task': 'gui.tasks.subscription_email_task',
+        'schedule': crontab(minute=0, hour='*/6'),
     },
 }
 

@@ -27,7 +27,7 @@ def send_subscription_emails(time):
     email_messages = []
 
     # Query subscriptions that need to send email at time
-    subscriptions = Subscription.objects.filter(next_time=time)
+    subscriptions = Subscription.objects.filter(next_time__lte=time)
 
     # Form email messages
     for subscription in subscriptions:
